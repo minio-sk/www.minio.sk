@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>CoffeeScript a Backbone.js</title>
+
+    <meta name="description" content="A jQuery library for modern HTML presentations">
+    <meta name="author" content="Caleb Troughton">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+
+    <!-- Core and extension CSS files -->
+    <link rel="stylesheet" href="../core/deck.core.css">
+    <link rel="stylesheet" href="../extensions/goto/deck.goto.css">
+    <link rel="stylesheet" href="../extensions/menu/deck.menu.css">
+    <link rel="stylesheet" href="../extensions/navigation/deck.navigation.css">
+    <link rel="stylesheet" href="../extensions/status/deck.status.css">
+    <link rel="stylesheet" href="../extensions/hash/deck.hash.css">
+
+    <link rel="stylesheet" href="../extensions/codemirror/deck.codemirror.css">
+    <link rel="stylesheet" href="../extensions/codemirror/themes/default.css">
+
+    <link rel="stylesheet" href="custom.css">
+
+    <link rel="stylesheet" id="transition-theme-link" href="../themes/transition/horizontal-slide.css">
+
+    <script src="../modernizr.custom.js"></script>
+</head>
+
+<body class="deck-container">
+
+<div class="slide" id="title-slide">
+  <hgroup>
+    <h1>Lepší Javascript: CoffeeScript a Backbone.js<br><br>
+      Tomáš Kramár, @tkramar
+    </h1>
+  </hgroup>
+</div>
+
+<div class="slide">
+  <h2>Čo vám vadí na JavaScripte?</h2>
+  <ul class="slide">
+    <li>Škaredá a ukecaná syntax</li>
+    <li>Musím byť stále v strehu 
+      <textarea class="code" mode="javascript" runnable="true">
+b = 1, c = 2, d = 3, e = 4
+a = b + c
+(d + e).print()
+      </textarea>
+    </li>
+    <li>Ťažko uchopiteľné OOP</li>
+    <li>Asynchrónny model -> špagetový kód</li>
+  </ul>
+</div>
+
+<div class="slide">
+    <h2>Škaredá a ukecaná syntax</h2>
+    <div>
+      <textarea class="code" mode="javascript">
+$(function() {
+  $('.expand').click(function() {
+    $(this).show();
+  });
+}
+      </textarea>
+    </div>
+  <div class="slide">
+    <h3>Rovnaký kód v <em>CoffeeScripte</em></h3>
+    <div>
+      <textarea class="code" mode="javascript">
+$ ->
+  $('.expand').click -> $(this).show()
+      </textarea>
+    </div>
+  </div>
+  <br><br><h3>CoffeeScript sa kompiluje do JavaScriptu</h3>
+</div>
+
+<div class="slide">
+  <h2>Ako CoffeeScript sprehľadňuje JavaScript?</h2>
+  <ul>
+    <li class="slide">Nepovinné bodkočiarky</li>
+    <li class="slide">Skrátená deklarácia funkcií
+      <textarea class="code" mode="javascript">var process = function(event) { foo(); }</textarea>
+      <textarea class="code" mode="javascript">process = (event) -> foo()</textarea>
+    </li>
+    <li class="slide">Nepovinné zátvorky
+      <textarea class="code" mode="javascript">console.log "Hello world"</textarea>
+    </li>
+    <li class="slide">Otočené podmienky
+      <textarea class="code" mode="javascript">console.log "Hello world" if debug</textarea>
+    </li>
+    <li class="slide">If naruby
+      <textarea class="code" mode="javascript">console.log "So sad" unless happy</textarea>
+    <li class="slide">Citlivý na odsadenie
+      <textarea class="code" mode="javascript">
+if debug
+  console.log "Hello world"</textarea></li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h2>Ako CoffeeScript sprehľadňuje JavaScript?</h2>
+  <ul>
+    <li class="slide">Implicitné vytváranie hashov
+      <textarea class="code" mode="javascript">$('.ohmy').css(position: 'relative', top: '20px', margin: '10px')</textarea>
+      <textarea class="code" mode="javascript">
+$('.ohmy').css
+  position: 'relative'
+  top: '20px'
+  margin: '10px'</textarea></li>
+    <li class="slide">Všetko je výraz a implicitný return
+      <textarea class="code" mode="javascript">mood = if raining than "sad" else "happy"</textarea></li>
+    </li>
+    <li class="slide">Zreťazené porovnávania
+      <textarea class="code" mode="javascript">console.log "it's a nice day" if 23 &lt; temperature &lt; 30 </textarea></li>
+    <li class="slide">Interpolácie reťazcov
+      <textarea class="code" mode="javascript">console.log "#{temperature}°C"</textarea></li>
+</div>
+
+<div class="slide">
+  <h2>Najväčšia zrada CoffeeScriptu</h2>
+  <textarea class="code" mode="javascript">
+sendAlertEmailTo = (address) ->
+  ...
+
+increaseFanRotation = ->
+  ...
+
+if temperature > 40
+  sendAlertEmailTo 'administrator@cvks.sk'
+  increaseFanRotation</textarea></li>
+
+  <div class='slide'>
+    <textarea class="code" mode="javascript">
+sendAlertEmailTo = function(address) { ... }
+increaseFanRotation = function() { ... }
+
+if(temperature > 40) {
+  sendAlertEmailTo('administrator@cvks.sk')
+  increaseFanRotation
+}</textarea></li>
+  </div>
+</div>
+
+<div class="slide">
+  <h2>Veľké finty CoffeeScriptu</h2>
+  <ul>
+    <li>Destructuring assignment
+      <textarea class="code" mode="javascript">[a, b] = [b, a]</textarea></li>
+    <li>Comprehensions
+      <textarea class="code" mode="javascript">drink(beer) for beer in ['kozel', 'staropramen', 'kozel']</textarea></li>
+    <li>Defaultné argumenty
+      <textarea class="code" mode="javascript">say = (what, shout = false) -> ...</textarea></li>
+      <textarea class="code" mode="javascript">fill = function(what, shout) {
+  if (shout == null) shout = false;
+  ...</textarea></li>
+  </ul>
+</div>
+
+<div class="slide code-and-image">
+  <h2>Objektovo orientovaný JavaScript</h2>
+  <textarea class="code" mode="javascript" runnable="true">
+function Animal(name) {
+  this.name = name;
+}
+
+Animal.prototype = {
+  canWalk: true,
+  sit: function() {
+    this.canWalk = false;
+    console.log(this.name + ' sits down.');
+  }
+}
+
+var animal = new Animal('Pet');
+console.log('Can walk? ' + animal.canWalk);
+
+animal.sit();
+console.log('Can walk? ' + animal.canWalk);
+  </textarea>
+  <img src='images/animal_constructor.png'/>
+  <div class="clear"></div>
+</div>
+
+<div class="slide code-and-image">
+  <h2>Dedenie</h2>
+  <textarea class="code" mode="javascript" runnable="true">
+function Animal(name) {
+  this.name = name;
+}
+Animal.prototype = {
+  canWalk: true,
+  sit: function() {
+    this.canWalk = false;
+    console.log(this.name + ' sits down.');
+  }
+}
+
+function Rabbit(name) {
+  this.name = name
+}
+
+Rabbit.prototype.jump = function() {
+  this.canWalk = true
+  console.log(this.name + ' jumps!')
+}
+
+Rabbit.prototype.__proto__ = Animal.prototype
+
+var rabbit = new Rabbit('John')
+console.log('Can walk? ' + rabbit.canWalk);
+
+rabbit.jump();
+console.log('Can walk? ' + rabbit.canWalk);
+
+rabbit.sit();
+console.log('Can walk? ' + rabbit.canWalk);
+
+  </textarea>
+  <img src='images/animal_inherit.png'/>
+  <div class="clear"></div>
+</div>
+
+<div class="slide">
+  <h2>Objektovo orientovaný CoffeeScript</h2>
+  <textarea class="code" mode="javascript">
+class Animal
+  canWalk: true
+  constructor: (@name) ->
+
+  sit: ->
+    @canWalk = false
+    console.log "#{@name} sits down."
+
+class Rabbit extends Animal
+  constructor: (@name) ->
+
+  jump: ->
+    @canWalk = true
+    console.log "#{name} jumps!"
+  </textarea>
+  <ul>
+    <li>@ je skratka pre this</li>
+    <li>Kľúčové slovo <em>class</em> sa postará o nastavenie prototypu a
+      konštruktora</li>
+    <li>@-parametre v konštruktore sú automaticky inicializované</li>
+    <li>Kľúčové slovo <em>extends</em> sa postará o nastavenie prototypovej
+      hierarchie</li>
+      <li><em>super</em> bez argumentov</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h2>Kontextové finty</h2>
+  <li class="slide">Kontext v JavaScripte
+    <textarea class="code" mode="javascript">
+$('.expand').each(function() {
+  $(this).click(function() {
+    $(this).show();
+  });
+});
+    </textarea>
+  </li>
+  <li class="slide">
+    <textarea class="code" mode="javascript">fn.call(context, arguments)</textarea>
+  </li>
+  <li class="slide">
+    <textarea class="code" mode="javascript">
+class DocumentController
+  initialize: ->
+    $('.next-page').click -> @document.nextPage()
+    </textarea>
+  </li>
+  <li class="slide">
+    <textarea class="code" mode="javascript">
+class DocumentController
+  initialize: ->
+    $('.next-page').click => @document.nextPage()
+    </textarea>
+  </li>
+
+</div>
+
+<div class="slide">
+  <h2>Ochrana pred najčastejšími chybami</h2>
+  <li class="slide">== je zradné, pretože robí coercion
+    <textarea class="code" mode="javascript" runnable="true">
+if(1 == true) {
+  console.log("Zrada");
+}</textarea></li>
+  <li class="slide">
+    <textarea class="code" mode="javascript" runnable="true">
+if(1 === true) {
+  console.log("Zrada");
+}</textarea></li>
+  </li>
+  <li class="slide">premenná deklarovaná bez <em>var</em> je globálna premenná</li>
+  <li class="slide">CoffeeScript deklaruje všetky premenné v správnom lexikálnom scope
+    <textarea class="code" mode="javascript">
+var temperature;
+
+function measure() {
+  var temperature = io.read();
+  ...
+}
+
+temperature = measure();</textarea></li>
+  <li class="slide">všetko je obalené v anonymnej funkcii
+    <textarea class="code" mode="javascript">(function(){ ... })();</textarea>
+  </li>
+</div>
+
+<div class="slide">
+  <h2>Backbone.js</h2>
+  <blockquote class="slide">
+    <p>After 15 years of spaghetti code, the JavaScript
+      community has finally discovered MVC</p>
+  </blockquote>
+</div>
+
+<div class="slide">
+  <h2>Základné komponenty Backbone</h2>
+  <ul>
+    <li class="slide"><strong>Model</strong>
+      <ul>
+        <li>urdžiavanie stavu aplikácie, aplikačná logika</li>
+      </ul>
+    </li>
+    <li class="slide"><strong>Collection</strong>
+      <ul>
+        <li>kolekcia modelov, niečo ako ruby Enumerable</li>
+      </ul>
+    </li>
+    <li class="slide"><strong>View</strong>
+      <ul>
+        <li>nič spoločné s Rails view, rendrovanie, správa udalostí</li>
+      </ul>
+    </li>
+    <li class="slide"><strong>Router</strong>
+      <ul>
+        <li>mapovanie URL na akcie</li>
+      </ul>
+    </li>
+    <li class="slide"><strong>Events</strong>
+      <ul>
+      <li>publish/subscribe</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h2>Model</h2>
+  <textarea class="code" mode="javascript">
+class Document extends Backbone.Model
+  defaults:
+    current_page: 1
+    mode: "view"
+
+  initialize: (document_attributes) ->
+    @pages = new Pages(document_attributes.pages)
+    @pages.each (page) => page.setAttachment(@)
+
+  showScan: ->
+    @set(type: "scan")
+    @pages.invoke "showScan"
+
+  validate: (attrs) ->
+    if typeof attrs.current_page != "undefined"
+      return "not a number" if isNaN(attrs.current_page)
+      return "exceeded max" unless 1 <= attrs.current_page <= @getTotalPages()
+      attrs.current_page = parseInt(attrs.current_page)
+    return
+
+  </textarea>
+</div>
+
+<div class="slide">
+  <h2>Collection</h2>
+  <textarea class="code" mode="javascript">
+class Pages extends Backbone.Collection
+  model: Page
+
+  comparator: (page) ->
+    page.getNumber()
+  </textarea>
+  <ul>
+    <li>map, reduce, filter, invoke, find, reject..</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h2>View</h2>
+
+  <textarea class="code" mode="javascript">
+class DocumentView extends Backbone.View
+
+  events:
+    "mousedown" : "startDragScroll",
+    "mousemove" : "dragScroll",
+    "scroll"    : "documentScrolled"
+
+  initialize: (options) ->
+    @editor = options.editor
+    @editor.bind("document:change:current_page", @autoScrollToCurrentPage, @)
+    @editor.bind("document:switch", @documentSwitched, @)
+
+  render: =>
+    _(@pageViews).invoke("render")
+    @hideAndShowVisiblePages()
+    @$('.selector').show()
+  </textarea>
+</div>
+
+<div class="slide">
+  <h2>Router</h2>
+  <textarea class="code" mode="javascript">
+class DocumentViewerRouter extends Backbone.Router
+  initialize: (options) ->
+    @editor = new Editor(
+      documents: DocumentsBuilder.build(options),
+      currentUser: options.currentUser,
+      onReply: options.onReply,
+      onShowReplies: options.onShowReplies)
+
+    @editor.bind("document:change", @updatePageRoute, @)
+    @editor.bind("document:switch", @updatePageRoute, @)
+
+    @editor_views =
+      [new NavigationView(editor: @editor, el: $('._dv_page_nav')),
+       new DocumentView(editor: @editor, el: $('._dv_document')),
+       new DocumentControlView(editor: @editor, el: $('._dv_document_control')),
+       new DocumentSelectorView(editor: @editor, el: $('#_dv_attachment_selector'))]
+
+    _(@editor_views).invoke('render')
+
+  routes:
+    "/document/:document/page/:page/comment/:comment": "goToDocumentPageComment"
+    "/document/:document/page/:page": "goToDocumentPage"
+    "": "index"
+
+  goToDocumentPageComment: (document, page, comment) ->
+    @editor.setCurrent(document_number: document, page_number: page, comment: comment)
+  </textarea>
+</div>
+
+<div class="slide">
+  <h1>Ukážka: Document Viewer (Single-page Web application)</h1>
+</div>
+
+<div class="slide">
+  <h2>Rails špagety</h2>
+  <h3>application.js</h3>
+  <textarea class="code" mode="javascript">
+$('.edit-note').live('click', function() {
+  $form = $(this).siblings('form');
+  $form.show();
+  $('textarea', $form).val($(this).siblings('p').html());
+  return false;
+});
+  </textarea>
+  <br><br>
+  <h3>create.js.erb</h3>
+  <textarea class="code" mode="ruby">
+<% if @note.errors.any? %>
+  $("#notes_errors").html("<%= escape_javascript(render(:partial => 'common/validation_errors', :object => @note, :as => :record)) %>");
+<% else %>
+  $("#notes_errors").html('');
+  $('#notes').html("<%= escape_javascript(render :partial => 'notes/show', :collection => @annotatable.notes, :as => :note, :locals => { :annotatable => @annotatable }) %>");
+  $("#new_note")[0].reset();
+<% end %>
+  </textarea>
+</div>
+
+<div class="slide">
+  <h1>Ukážka: Ako sa vyhnúť Rails špagetám</h1>
+</div>
+
+<div class="slide">
+  <h2>Zdroje</h2>
+  <ul>
+    <li><a
+        href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a></li>
+    <li><a
+        href="http://documentcloud.github.com/backbone">Backbone.js</a></li>
+    <li><a
+        href="http://javascript.info/tutorial/pseudo-classical-pattern">JavaScript
+    Inheritance</a></li>
+    <li><a
+        href="http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/">Understanding JavaScript Function Invocation and “this”</a></li>
+</div>
+
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<p class="deck-status">
+    <span class="deck-status-current"></span>
+    /
+    <span class="deck-status-total"></span>
+</p>
+
+<form action="." method="get" class="goto-form">
+    <label for="goto-slide">Go to slide:</label>
+    <input type="number" name="slidenum" id="goto-slide">
+    <input type="submit" value="Go">
+</form>
+
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
+<script>window.jQuery || document.write('<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.min.js">\x3C/script>')</script>
+
+<!-- Deck Core and extensions -->
+<script src="../core/deck.core.js"></script>
+<script src="../extensions/menu/deck.menu.js"></script>
+<script src="../extensions/goto/deck.goto.js"></script>
+<script src="../extensions/status/deck.status.js"></script>
+<script src="../extensions/navigation/deck.navigation.js"></script>
+<script src="../extensions/hash/deck.hash.js"></script>
+<script src="../extensions/codemirror/deck.codemirror.js"></script>
+
+<!-- Specific to this page -->
+<script src="introduction.js"></script>
+
+</body>
+</html>

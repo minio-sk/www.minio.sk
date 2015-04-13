@@ -1,0 +1,70 @@
+.slide > div.slide {
+  margin-top: 2em;
+}
+
+.code-and-image .CodeMirror, .code-and-image .deck-codemirror-result {
+  width: 70%;
+  float: left;
+}
+
+.clear {
+  clear: both;
+}
+
+.credits {
+  display: block;
+  text-align: right;
+  margin-top: 2em;
+}
+
+.CodeMirror {
+  margin-top: 1em !important;
+}
+
+.deck-container blockquote {
+  font-family: "Hoefler Text", Constantia, Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: 2em;
+  padding: 1em 2em .5em 2em;
+  color: #000;
+  background: #fff;
+  position: relative;
+  border: 1px solid #cde;
+}
+.borderradius .deck-container blockquote {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.boxshadow .deck-container blockquote:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 10px;
+  bottom: 10px;
+  left: 0;
+  right: 0%;
+  -moz-border-radius: 10px/100px;
+  border-radius: 10px/100px;
+  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+}
+.deck-container blockquote p {
+  margin: 0;
+}
+.deck-container blockquote cite {
+  font-size: .5em;
+  font-style: normal;
+  font-weight: bold;
+  color: #888;
+}
+.deck-container blockquote:before {
+  content: "“";
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 5em;
+  line-height: 1;
+  color: #ccf0f0;
+  z-index: 1;
+}

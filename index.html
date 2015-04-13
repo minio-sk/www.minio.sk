@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Ruby on Rails development, training &amp; consulting company &middot; minio, s.r.o.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Dosis&subset=latin-ext' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <style type="text/css">
+        body {
+            padding: 5em;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Dosis', sans-serif;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 50px;
+            line-height: 1.5em;
+            margin: 5em 0 1em 0;
+        }
+
+        h3 {
+            margin: 2em 0 1em 0;
+        }
+
+        p {
+            font-size: 30px;
+            line-height: 1.5em;
+            margin: 1em 0;
+        }
+
+        address {
+            font-size:  20px;
+            line-height: 1.5em;
+        }
+
+        em {
+            background-color: #fafaa0;
+            font-style: normal;
+            padding: 0 3px;
+        }
+
+        .jumbotron h1 {
+            font-size: 100px;
+            line-height: 1.5em;
+        }
+
+        .jumbotron .claim, .jumbotron p {
+            font-size: 40px;
+            line-height: 1.5em;
+            margin: 1em;
+            padding: 0;
+        }
+
+        .jumbotron .claim em {
+            padding: 5px 10px;
+
+        }
+
+        .jumbotron .btn {
+            font-size: 30px;
+            padding: 1em 2em;
+            font-weight: bold;
+            margin: 2em;
+            box-shadow: 3px 3px 25px #888;
+        }
+
+        .projects {
+            padding-bottom: 2em;
+        }
+
+        .projects p {
+            font-size: 20px;
+        }
+
+        a {
+            color: #3777CC;
+            text-decoration: underline;
+        }
+
+        a.btn {
+            text-decoration: none;
+        }
+
+
+
+        .footer {
+           padding: 12em 0;
+        }
+
+        .footer p {
+            font-size: 15px;
+        }
+
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $('*[data-scrollto]').click(function (event) {
+                event.preventDefault();
+                var selector = $(this).attr('href');
+                $('html, body').animate({
+                    scrollTop: $(selector).offset().top
+                }, 1000);
+            });
+
+            $('[data-track]').click(function (event) {
+                var label = $(this).text();
+                _gaq.push(['_trackEvent', 'Actions', 'Click', label]);
+            });
+        });
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-25318707-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1>minio</h1>
+
+        <p class="claim">
+            <em>A company of exceptional hackers.</em>
+        </p>
+
+        <p class="lead">We work on <a href="#projects" data-scrollto data-track>extraordinary projects</a>, do <a href="#training-and-consulting" data-scrollto data-track>training</a>,
+            <a href="#training-and-consulting" data-scrollto data-track>optimize web apps</a> and
+            <a href="#giving-back" data-scrollto data-track>give back to community</a>.</p>
+
+        <a id="cta" class="btn btn-large btn-primary" href="#contact" data-scrollto data-track>Contact us</a>
+    </div>
+
+    <h2 id="projects">Extraordinary projects</h2>
+
+    <p>We love challenging projects.</p>
+
+    <div class="row projects">
+        <div class="span6">
+
+            <h3><a href="http://otvorenezmluvy.sk">www.otvorenezmluvy.sk</a></h3>
+
+            <p><em>Crawling terabytes of scanned government contracts</em> and <em>making them
+                searchable and analyzable</em> for
+                journalists,
+                NGOs, whistleblowers and everyone else in a split of a second?
+                <strong>Done.</strong></p>
+        </div>
+
+        <div class="span6">
+            <h3><a href="http://govdata.sk">www.govdata.sk</a></h3>
+
+            <p>Collecting, <em>cleaning</em>, structuring and <em>linking milions of entities</em> from open data
+                sources and
+                providing a <em>searchable API every programmer dreams of?</em> <strong>Done.</strong></p>
+        </div>
+    </div>
+
+    <div class="row projects">
+        <div class="span6 offset3">
+
+            <h3>Fraud detection system (not public)</h3>
+
+            <p>Detecting <em>suspicious procurements in European financing schemes</em> from connections of individuals
+                and companies? <strong>Done.</strong></p>
+        </div>
+    </div>
+
+    <p>What's your challenge? <strong><a href="#contact" data-scrollto data-track>Try us!</a></strong></p>
+
+    <h2 id="training-and-consulting">Training &amp; Consulting</h2>
+
+    <p><em><strong>We know the stuff we do.</strong></em> <strong>OOP</strong>, <strong>TDD</strong>, <strong>Ruby on
+        Rails</strong>, <strong>databases</strong> (MySQL, PostgreSQL), <strong>NoSQL</strong> (redis, elasticsearch),
+        <strong>data mining</strong>, <strong>analytics</strong>, client side &amp; server side <strong>optimization and
+            scaling</strong>.</p>
+
+    <p><em>Want in-house training?</em></p>
+
+    <p><em>Having problems with your application performance?</em></p>
+
+    <p><em>Slow page loads or database queries?</em></p>
+
+    <p><strong><a href="#contact" data-scrollto data-track>Need help? Contact us!</a></strong></p>
+
+
+    <h2 id="giving-back">Giving back</h2>
+
+    <p>We organize <a href="http://lanyrd.com/series/rubyslava/">Rubyslava / PyVo</a>. A <em>regular monthly meetup for
+        Ruby&nbsp;&amp;&nbsp;Python developers</em> in Bratislava. After <em>2+ years</em> and <em>50+ tech talks</em>
+        with a community of <em>200+ members</em>.</p>
+
+    <p>We lead <em>courses on programming and building webapps</em> for students at Slovak University of Technology.</p>
+
+    <p>We participate in <em>hackatons</em> and do <em>opensource</em>.</p>
+
+    <h2 id="team">The Team</h2>
+    <div class="row team">
+        <div class="span4">
+            <img src="images/tkramar.jpg" alt="" height="200" width="200" class="img-circle">
+            <h3>Tomáš Kramár</h3>
+        </div>
+
+        <div class="span4">
+            <img src="http://www.gravatar.com/avatar/8b4691e426e23289f6bd173203c4ab34?s=200" alt="" height="200" width="200" class="img-circle">
+            <h3>Ján Suchal</h3>
+        </div>
+
+
+        <div class="span4">
+            <img src="http://www.gravatar.com/avatar/f21d804953cd3b4742854911c6363388?s=200" alt="" height="200" width="200" class="img-circle">
+            <h3>Michal Barla</h3>
+        </div>
+    </div>
+
+    <div class="jumbotron">
+        <h2 id="contact">Contact us</h2>
+
+        <p><a href="mailto:hello@minio.sk" class="btn btn-large btn-primary">hello@minio.sk</a></p>
+    </div>
+
+    <address>
+        <strong>minio, s.r.o.</strong><br>
+        Kuklovská 5<br>
+        841 04 Bratislava<br>
+        Slovakia
+    </address>
+</div>
+
+
+<div class="footer">
+    <p>&copy; 2011&ndash;2013  minio s.r.o.</p>
+</div>
+</body>
+</html>
