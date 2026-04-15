@@ -40,7 +40,11 @@
         }
 
         header {
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
         }
 
         h1 {
@@ -48,15 +52,13 @@
             font-weight: 700;
             line-height: 1.1;
             margin: 0 0 0.5rem 0;
-            letter-spacing: -0.02em;
         }
 
         h2 {
-            font-size: 1.75rem;
-            font-weight: 700;
+            font-size: 1.45rem;
+            font-weight: normal;
+            font-variant: all-small-caps;
             margin: 3rem 0 1rem 0;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #b1b4b6;
         }
 
         h3 {
@@ -69,6 +71,11 @@
             margin: 0 0 1.25rem 0;
         }
 
+        .body-lead {
+            font-size: 1.5rem;
+            text-wrap-style: pretty;
+        }
+
         ul {
             margin: 0 0 1.25rem 0;
             padding-left: 1.5rem;
@@ -78,51 +85,42 @@
             margin-bottom: 0.5rem;
         }
 
-        a {
-            color: #005ea5;
-            text-decoration: underline;
-        }
-
-        a:hover {
-            color: #003078;
-        }
-
-        .tag {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 0.125rem 0.5rem;
-            margin-left: 0.75rem;
-            background: #f3f2f1;
-            color: #505050;
-            text-decoration: none;
-            vertical-align: middle;
-        }
-
         address {
             font-style: normal;
-            line-height: 1.6;
-        }
-
-        .contact-grid {
-            display: grid;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            padding-bottom: 1rem;
+            color: #505050;
         }
 
         .contact-label {
-            font-weight: 400;
+            font-weight: 300;
             color: #505050;
         }
 
-        footer {
-            margin-top: 5rem;
-            padding-top: 2rem;
-            border-top: 2px solid #0b0c0c;
-            font-size: 0.875rem;
-            color: #505050;
+        .button {
+            -webkit-appearance: none;
+            appearance: none;
+            display: inline-block;
+            font-size: 1rem;
+            color: #fff;
+            text-align: center;
+            line-height: 20px;
+            border: none;
+            background: #15803d;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2);
+            padding: 16px 20px 13px;
+            border-radius: 8px;
+            border-bottom: 4px solid #166534;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background: #166534;
+            color: #fff;
+        }
+
+        .slash {
+            font-weight: bold;
+            color: #15803d;
         }
 
         @media (min-width: 640px) {
@@ -140,29 +138,28 @@
     <div class="measure">
         <header>
             <h1>minio</h1>
-            <p></p>
+            <p class="body-lead">A small company providing exceptional products &amp;&nbsp;services.</p>
+            <p><a href="mailto:hello@minio.sk" class="button">Contact us at <strong>hello@minio.sk</strong></a></p>
         </header>
 
         <main>
             <section>
-                <h2>Services</h2>
+                <h2>Exceptional services</h2>
                 <ul>
-                    <li>Software Development / IT Consulting / Training</li>
+                    <li>Software Development <span class="slash">/</span> IT Consulting <span class="slash">/</span> Training</li>
                     <li>Education for Children</li>
                 </ul>
             </section>
 
-
             <section>
-                <h2>Contact</h2>
-                <p><a href="mailto:hello@minio.sk">hello@minio.sk</a></p>
-                
+                <h2>Company details</h2>
                 <address>
                     <div class="contact-grid">
                         <address>
-                            minio, s.r.o.<br>
+                            <strong>minio, s.r.o.</strong><br>
                             Púpavová 691/31<br>
-                            841 04 Bratislava
+                            841 04 Bratislava<br>
+                            Slovakia
                         </address>
                         <div>
                             <span class="contact-label">Company ID/IČO:</span> 46058397<br>
